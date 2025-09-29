@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       process.env.STRIPE_WEBHOOK_SECRET
     );
   } catch (err) {
-    return res.status(400).send(`Webhook Error: ${err.message}`);
+    return res.status(400).send(`Błąd webhook: ${err.message}`);
   }
 
   if (event.type === "checkout.session.completed") {
@@ -38,9 +38,11 @@ export default async function handler(req, res) {
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: session.customer_email,
-      subject: "Ваши фотографии 📸",
-      text: "Спасибо за покупку! Скачайте фото по ссылке: https://example.com/download",
+      subject: "Dziękujemy za zakup 📸",
+      text: `Dziękuję za Twój zakup! Możesz pobrać zdjęcia klikając w poniższy link: https://example.com/download`,
     });
+
+    console.log(`E-mail wysłany do: ${session.customer_email}`);
   }
 
   res.json({ received: true });
