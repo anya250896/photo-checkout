@@ -1,0 +1,8 @@
+photo-checkout/
+ ├── api/
+ │    ├── create-checkout-session.js
+ │    └── webhook.js
+ ├── pages/
+ │    ├── success.js
+ │    └── cancel.js
+ └── package.json
